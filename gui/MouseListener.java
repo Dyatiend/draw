@@ -24,8 +24,8 @@ import shapes.Text;
 
 public class MouseListener extends MouseAdapter {
 
-	private DrawingController c;
-	private ToolBox tools;
+	private final DrawingController c;
+	private final ToolBox tools;
 
 	boolean isDrawing;
 	boolean multiSelect;
@@ -33,7 +33,7 @@ public class MouseListener extends MouseAdapter {
 	private Point startPos;
 	private Point lastPos;
 
-	private Point mouseDelta;
+	private final Point mouseDelta;
 
 	private Shape newShape;
 
@@ -64,9 +64,7 @@ public class MouseListener extends MouseAdapter {
 		}
 
 		if (c.getTool() == Tool.SELECT) {
-			for (Shape s : c.getSelection()) {
-				s.move(mouseDelta.x, mouseDelta.y);
-			}
+			c.moveSelectedShapes(new Point(mouseDelta.x, mouseDelta.y));
 		}
 
 		c.getDrawing().repaint();

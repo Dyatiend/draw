@@ -1,12 +1,9 @@
 package logic;
 
-import gui.DrawGUI;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import shapes.Shape;
 import actions.AddAction;
 import actions.ColorAction;
 import actions.DeleteAction;
@@ -14,13 +11,15 @@ import actions.DrawAction;
 import actions.FillAction;
 import actions.MoveAction;
 import actions.UndoManager;
+import gui.DrawGUI;
+import shapes.Shape;
 
 public class DrawingController {
 
 	private Drawing drawing;
-	private UndoManager undoManager;
-	private Selection selection;
-	private DrawGUI gui;
+	private final UndoManager undoManager;
+	private final Selection selection;
+	private final DrawGUI gui;
 	private Tool tool;
 
 	public DrawingController(DrawGUI g) {
@@ -68,7 +67,6 @@ public class DrawingController {
 	public void moveSelectedShapes(Point movement) {
 		if (!selection.isEmpty()) {
 			DrawAction move = new MoveAction(selection, movement);
-			undoManager.addAction(move);
 			move.execute();
 		}
 	}
